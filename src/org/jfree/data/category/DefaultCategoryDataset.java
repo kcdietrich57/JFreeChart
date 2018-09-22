@@ -69,6 +69,10 @@ public class DefaultCategoryDataset extends AbstractDataset
     /** A storage structure for the data. */
     private DefaultKeyedValues2D data;
 
+    public void setRowKeys(List keys) {
+    	this.data.rowKeys = keys;
+    }
+
     /**
      * Creates a new (empty) dataset.
      */
@@ -442,5 +446,4 @@ public class DefaultCategoryDataset extends AbstractDataset
         clone.data = (DefaultKeyedValues2D) this.data.clone();
         return clone;
     }
-
 }

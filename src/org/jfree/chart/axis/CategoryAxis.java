@@ -199,6 +199,8 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
     /** Storage for the category label URLs (if any). */
     private Map categoryLabelURLs;
     
+    public Comparable[] tickLabels;
+
     /**
      * Creates a new category axis with no label.
      */
@@ -1164,6 +1166,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             while (iterator.hasNext()) {
                 Comparable category = (Comparable) iterator.next();
                 g2.setFont(getTickLabelFont(category));
+                if ((this.tickLabels != null) && (categoryIndex < tickLabels.length)) {
+                	category = this.tickLabels[categoryIndex];
+                }
                 TextBlock label = createLabel(category, l * r, edge, g2);
                 if (edge == RectangleEdge.TOP || edge == RectangleEdge.BOTTOM) {
                     max = Math.max(max, calculateTextBlockHeight(label,
@@ -1184,6 +1189,10 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         state.setMax(max);
         return ticks;
 
+    }
+
+    public void setLabel(int idx, String label) {
+    	
     }
 
     /**

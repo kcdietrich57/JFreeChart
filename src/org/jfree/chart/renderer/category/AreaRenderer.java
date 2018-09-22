@@ -87,6 +87,7 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.entity.EntityCollection;
 import org.jfree.chart.event.RendererChangeEvent;
+import org.jfree.chart.labels.CategorySeriesLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.AreaRendererEndType;
@@ -171,8 +172,8 @@ public class AreaRenderer extends AbstractCategoryItemRenderer
         }
 
         CategoryDataset dataset = cp.getDataset(datasetIndex);
-        String label = getLegendItemLabelGenerator().generateLabel(dataset,
-                series);
+        CategorySeriesLabelGenerator gen = getLegendItemLabelGenerator();
+        String label = gen.generateLabel(dataset, series);
         String description = label;
         String toolTipText = null;
         if (getLegendItemToolTipGenerator() != null) {

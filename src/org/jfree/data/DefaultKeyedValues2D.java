@@ -79,7 +79,7 @@ public class DefaultKeyedValues2D implements KeyedValues2D, PublicCloneable,
     private static final long serialVersionUID = -5514169970951994748L;
 
     /** The row keys. */
-    private List rowKeys;
+    public List rowKeys;
 
     /** The column keys. */
     private List columnKeys;

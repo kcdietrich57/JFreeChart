@@ -115,6 +115,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -1140,6 +1142,23 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
         List categories = plot.getCategoriesForAxis(this);
         double max = 0.0;
 
+		if (this.tickLabels != null) {
+			categories = new ArrayList(Arrays.asList(this.tickLabels));
+		}
+
+		int maxx = 70;
+		if (categories.size() > maxx) {
+			int n = categories.size() / maxx;
+		
+			for (int idx = 0; idx < categories.size(); ++idx) {
+				for (int x = 0; x < n; ++x) {
+					if (idx < categories.size() - 1) {
+						categories.remove(idx + 1);
+					}
+				}
+			}
+		}
+
         if (categories != null) {
             CategoryLabelPosition position
                     = this.categoryLabelPositions.getLabelPosition(edge);
@@ -1166,9 +1185,9 @@ public class CategoryAxis extends Axis implements Cloneable, Serializable {
             while (iterator.hasNext()) {
                 Comparable category = (Comparable) iterator.next();
                 g2.setFont(getTickLabelFont(category));
-                if ((this.tickLabels != null) && (categoryIndex < tickLabels.length)) {
-                	category = this.tickLabels[categoryIndex];
-                }
+//                if ((this.tickLabels != null) && (categoryIndex < tickLabels.length)) {
+//                	category = this.tickLabels[categoryIndex];
+//                }
                 TextBlock label = createLabel(category, l * r, edge, g2);
                 if (edge == RectangleEdge.TOP || edge == RectangleEdge.BOTTOM) {
                     max = Math.max(max, calculateTextBlockHeight(label,
